@@ -1,0 +1,34 @@
+from engine import Engine, random_behaivor
+from myobject import MyObject
+from myobject2 import MyObject2
+from myobject3 import MyObject3
+import random
+
+
+obj = MyObject(fullhp=3, nrays=10)
+obj2 = MyObject2(fullhp=3, nrays=10)
+obj3 = MyObject3(fullhp=3, nrays=10)
+
+def my_foo3(data: dict) -> dict:
+    global obj3
+    obj3.update_info(data)
+    behaivor = obj3.get_behaivor()
+    if not obj3.rollback:
+        obj3.build_traj(behaivor)
+    return behaivor
+
+def my_foo(data: dict) -> dict:
+    global obj
+    obj.update_info(data)
+    behaivor = obj.get_behaivor()
+    if not obj.rollback:
+        obj.build_traj(behaivor)
+    return behaivor
+
+def my_foo2(data: dict) -> dict:
+    global obj2
+    obj2.update_info(data)
+    behaivor = obj2.get_behaivor()
+    if not obj2.rollback:
+        obj2.build_traj(behaivor)
+    return behaivor

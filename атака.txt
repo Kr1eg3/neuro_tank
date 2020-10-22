@@ -1,0 +1,19 @@
+    def __deeznuts(self):
+        if len(self.enemies) == 0:
+            self.__rotate(1)
+            self.__may_fire(0)
+            self.__vision(-1)
+        else: 
+            moo = self.enemies[0]
+            if moo[0] < 0:
+                self.__rotate(-0.5)
+                self.__may_fire(1)
+                self.__vision(-0.8)
+            elif moo[0] == 0:
+                self.__rotate(0)
+                self.__may_fire(1)
+                self.__vision(-0.8)
+            elif moo[0] > 0:
+                self.__rotate(0.5)
+                self.__may_fire(1)
+                self.__vision(-0.8)
