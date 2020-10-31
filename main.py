@@ -1,6 +1,4 @@
 from engine import Engine, random_behaivor
-from myobject import MyObject
-#from myobject2 import MyObject2
 from myobject3 import MyObject3
 from reinforce_torch import PolicyGradientAgent
 import random
@@ -8,9 +6,6 @@ from pprint import pprint
 import numpy as np
 import torch as T
 
-
-obj = MyObject(fullhp=3, nrays=10)
-#obj2 = MyObject2(fullhp=3, nrays=10)
 obj3 = MyObject3(fullhp=3, nrays=10)
 agent = PolicyGradientAgent(gamma=0.99, lr=0.001, input_dims=[17], n_actions=8)
 
@@ -26,29 +21,6 @@ def my_foo3(data: dict) -> dict:
     if not obj3.rollback:
         obj3.build_traj(behaivor)
     return behaivor
-
-def my_foo(data: dict) -> dict:
-    global obj
-    obj.update_info(data)
-    behaivor = obj.get_behaivor()
-    if not obj.rollback:
-        obj.build_traj(behaivor)
-    return behaivor
-
-def rotation(input_dict):
-    target = input_dict.get('enemies')  # enemies - список в котором кортеж
-    Steprotation = None
-    if len(target) == 0:
-        Steprotation = {'rotate': 1, 'fire': 0, 'vision': -1}
-    else:
-        moo = target[0]
-        if moo[0] < 0:
-            Steprotation = {'rotate': -0.5, 'fire': 1, 'vision': -0.8}
-        elif moo[0] == 0:
-            Steprotation = {'rotate': 0, 'fire': 1, 'vision': -0.8}
-        elif moo[0] > 0:
-            Steprotation = {'rotate': 0.5, 'fire': 1, 'vision': -0.8}
-    return Steprotation
 
 def create_brain(data: dict):
     def new_brain(x):
@@ -90,7 +62,6 @@ else:
 if __name__ == '__main__':
     n_games = 3000
     scores = []
-    
     for i in range(n_games):
         im = Engine.get_standart(you_brain_foo=my_foo3, enemy_brain_foo=my_foo3)
         info = im.step(render=True)
